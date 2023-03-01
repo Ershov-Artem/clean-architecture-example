@@ -1,4 +1,5 @@
-import 'package:clean_architecture_example/presentation/home/controller/home_controller.dart';
+
+import '../controller/home_controller.dart';
 
 class ControllerModule {
   HomeController? _homeController;
