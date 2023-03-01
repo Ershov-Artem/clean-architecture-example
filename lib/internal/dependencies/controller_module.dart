@@ -1,5 +1,6 @@
 
-import '../controller/home_controller.dart';
+
+import '../../domain/controller/home_controller.dart';
 
 class ControllerModule {
   HomeController? _homeController;

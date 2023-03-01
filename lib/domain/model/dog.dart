@@ -1,5 +1,5 @@
-import 'pet.dart';
+class Dog {
+  Dog({required this.image});
 
-class Dog extends Pet{
-  Dog({required super.image});
+  final String image;
 }

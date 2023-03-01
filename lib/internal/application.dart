@@ -1,6 +1,5 @@
+import 'package:clean_architecture_example/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
-
-import '../presentation/home/home_page.dart';
 
 class Application extends StatelessWidget {
   const Application({Key? key}) : super(key: key);

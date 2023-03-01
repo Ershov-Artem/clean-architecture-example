@@ -1,5 +1,8 @@
-import '../model/pet.dart';
+
+import '../model/cat.dart';
+import '../model/dog.dart';
 
 abstract class PetRepository {
-  Future<Pet> getData();
+  Future<Dog> getDog();
+  Future<Cat> getCat();
 }

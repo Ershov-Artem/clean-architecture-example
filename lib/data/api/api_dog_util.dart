@@ -1,17 +1,14 @@
-import '../../domain/model/pet.dart';
+import '../../domain/model/dog.dart';
 import '../mapper/dog_mapper.dart';
 import 'service/dog_service.dart';
 
 class ApiDogUtil {
-  final DogService? _dogService;
+  final DogService _dogService;
 
   ApiDogUtil(this._dogService);
 
-  Future<Pet> getDog({
-    required String baseUrl,
-    required String path,
-  }) async {
-    final result = await _dogService!.getPet(baseUrl: baseUrl,path: path);
+  Future<Dog> getDog() async {
+    final result = await _dogService.getPet();
     return DogMapper.fromApi(result);
   }
 }
