@@ -7,8 +7,4 @@ import 'pet_model.dart';
 class DogModel implements PetModel{
   @override
   String get text => 'Покажи собаку';
-
-  @override
-  PetRepository get repository => RepositoryModule.dogRepository();
-
 }

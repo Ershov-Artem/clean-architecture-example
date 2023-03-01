@@ -1,10 +1,14 @@
+import 'package:clean_architecture_example/data/repository/cat_repository.dart';
 import 'package:clean_architecture_example/internal/dependencies/controller_module.dart';
+import 'package:clean_architecture_example/internal/dependencies/repository_module.dart';
 import 'package:clean_architecture_example/internal/models/cat_model.dart';
 import 'package:clean_architecture_example/internal/models/dog_model.dart';
 import 'package:clean_architecture_example/internal/models/pet_model.dart';
 import 'package:clean_architecture_example/presentation/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '../../domain/repository/pet_repository.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -15,7 +19,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
         child: Observer(
           builder: (context) => Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,11 +28,13 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _HomeButton(
+                    petRepository: RepositoryModule.catRepository(),
                     isSelected: homeController.model is CatModel,
                     homeController: homeController,
                     model: CatModel(),
                   ),
                   _HomeButton(
+                    petRepository: RepositoryModule.dogRepository(),
                     isSelected: homeController.model is DogModel,
                     homeController: homeController,
                     model: DogModel(),
@@ -50,9 +56,14 @@ class HomePage extends StatelessWidget {
 }
 
 class _HomeButton extends StatelessWidget {
-  const _HomeButton({required this.model, required this.homeController, required this.isSelected});
+  const _HomeButton(
+      {required this.model,
+      required this.homeController,
+      required this.isSelected,
+      required this.petRepository});
 
   final PetModel model;
+  final PetRepository petRepository;
   final HomeController homeController;
   final bool isSelected;
 
@@ -60,7 +71,10 @@ class _HomeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        homeController.setModel(model);
+        homeController.setModel(
+          model,
+          petRepository,
+        );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -70,8 +84,8 @@ class _HomeButton extends StatelessWidget {
             border: isSelected
                 ? Border.all(color: Colors.lightGreenAccent, width: 2)
                 : Border.all(width: 2)),
-        child: Padding(padding: const EdgeInsets.all(12),
-        child: Text(model.text)),
+        child:
+            Padding(padding: const EdgeInsets.all(12), child: Text(model.text)),
       ),
     );
   }
@@ -96,7 +110,10 @@ class _RequestButton extends StatelessWidget {
           color: Colors.lightGreenAccent,
           borderRadius: BorderRadius.all(Radius.circular(14)),
         ),
-        child: const Center(child: Text('Смотреть',)),
+        child: const Center(
+            child: Text(
+          'Смотреть',
+        )),
       ),
     );
   }
@@ -113,7 +130,10 @@ class _PetImageWidget extends StatelessWidget {
         builder: (context) => SizedBox(
               height: 200,
               child: homeController.pet != null
-                  ? Image.network(homeController.pet!.image, fit: BoxFit.cover,)
+                  ? Image.network(
+                      homeController.pet!.image,
+                      fit: BoxFit.cover,
+                    )
                   : null,
             ));
   }

@@ -1,8 +1,9 @@
 
-import 'package:clean_architecture_example/internal/models/pet_model.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../domain/model/pet.dart';
+import '../../../domain/repository/pet_repository.dart';
+import '../../../internal/models/pet_model.dart';
 
 part 'home_controller.g.dart';
 
@@ -15,15 +16,19 @@ abstract class HomeControllerBase with Store {
   PetModel? model;
 
   @observable
+  PetRepository? repository;
+
+  @observable
   Pet? pet;
 
   @action
-  void setModel(PetModel petModel){
+  void setModel(PetModel petModel, PetRepository petRepository){
+    repository = petRepository;
     model = petModel;
   }
 
   @action
   Future<void> getPet() async {
-    pet = await model!.repository.getData();
+    pet = await repository!.getData();
   }
 }

@@ -8,12 +8,12 @@ class RepositoryModule {
   static PetRepository? _dogRepository;
 
   static PetRepository catRepository() {
-    _catRepository ??= CatRepository(ApiModule.apiUtil());
+    _catRepository ??= CatRepository(ApiModule.apiCatUtil());
     return _catRepository!;
   }
 
   static PetRepository dogRepository() {
-    _dogRepository ??= DogRepository(ApiModule.apiUtil());
+    _dogRepository ??= DogRepository(ApiModule.apiDogUtil());
     return _dogRepository!;
   }
 }

@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../model/api_pet.dart';
+import '../model/api_cat.dart';
 
-class PetService {
-  Future<ApiPet> getPet({
+class CatService {
+  Future<ApiCat> getPet({
     required String baseUrl,
     required String path,
-}) async {
+  }) async {
     final response = await http.get(Uri.https(baseUrl,path));
-    return ApiPet.fromApi(jsonDecode(response.body));
-}
+    return ApiCat.fromApi(jsonDecode(response.body));
+  }
 }
