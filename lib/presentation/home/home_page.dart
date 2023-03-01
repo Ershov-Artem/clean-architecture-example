@@ -1,10 +1,9 @@
-import 'package:clean_architecture_example/data/repository/cat_repository.dart';
+import 'package:clean_architecture_example/internal/controller/home_controller.dart';
 import 'package:clean_architecture_example/internal/dependencies/controller_module.dart';
 import 'package:clean_architecture_example/internal/dependencies/repository_module.dart';
 import 'package:clean_architecture_example/internal/models/cat_model.dart';
 import 'package:clean_architecture_example/internal/models/dog_model.dart';
 import 'package:clean_architecture_example/internal/models/pet_model.dart';
-import 'package:clean_architecture_example/presentation/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
